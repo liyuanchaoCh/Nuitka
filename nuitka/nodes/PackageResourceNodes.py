@@ -31,6 +31,7 @@ from .ExpressionShapeMixins import (
 )
 from .ImportHardNodes import ExpressionImportModuleNameHardExists
 from .NodeBases import SideEffectsFromChildrenMixin
+from nuitka.Options import shallMakeModule
 
 pkgutil_get_data_spec = BuiltinParameterSpec(
     "pkg_util.get_data", ("package", "resource"), default_count=0
@@ -67,6 +68,7 @@ class ExpressionPkglibGetDataRef(ExpressionImportModuleNameHardExists):
             self,
             module_name="pkgutil",
             import_name="get_data",
+            module_guaranteed=True,
             source_ref=source_ref,
         )
 
@@ -117,6 +119,7 @@ class ExpressionPkgResourcesResourceStringRef(ExpressionImportModuleNameHardExis
             self,
             module_name="pkg_resources",
             import_name="resource_string",
+            module_guaranteed=not shallMakeModule(),
             source_ref=source_ref,
         )
 
@@ -175,6 +178,7 @@ class ExpressionPkgResourcesResourceStreamRef(ExpressionImportModuleNameHardExis
             self,
             module_name="pkg_resources",
             import_name="resource_stream",
+            module_guaranteed=not shallMakeModule(),
             source_ref=source_ref,
         )
 
@@ -227,6 +231,7 @@ class ExpressionImportlibResourcesReadBinaryRef(ExpressionImportModuleNameHardEx
             self,
             module_name="importlib.resources",
             import_name="read_binary",
+            module_guaranteed=True,
             source_ref=source_ref,
         )
 
@@ -281,6 +286,7 @@ class ExpressionImportlibResourcesReadTextRef(ExpressionImportModuleNameHardExis
             self,
             module_name="importlib.resources",
             import_name="read_text",
+            module_guaranteed=True,
             source_ref=source_ref,
         )
 

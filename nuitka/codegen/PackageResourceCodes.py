@@ -23,7 +23,7 @@ from .CodeHelpers import (
     withObjectCodeTemporaryAssignment,
 )
 from .ImportCodes import getImportModuleNameHardCode
-
+from nuitka.Options import shallMakeModule
 
 def generatePkglibGetDataCallCode(to_name, expression, emit, context):
     package_name, resource_name = generateChildExpressionsCode(
@@ -72,7 +72,7 @@ def generatePkgResourcesResourceStringCallCode(to_name, expression, emit, contex
             to_name=resource_string_function,
             module_name="pkg_resources",
             import_name="resource_string",
-            needs_check=False,
+            needs_check=not shallMakeModule(),
             emit=emit,
             context=context,
         )
@@ -169,7 +169,7 @@ def generatePkgResourcesResourceStreamCallCode(to_name, expression, emit, contex
             to_name=resource_stream_function,
             module_name="pkg_resources",
             import_name="resource_stream",
-            needs_check=False,
+            needs_check=not shallMakeModule(),
             emit=emit,
             context=context,
         )
